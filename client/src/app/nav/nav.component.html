@@ -2,24 +2,27 @@
   <div class="container">
     <a class="navbar-brand" href="#">PlayHaven</a>
 
-    <ul
-      *ngIf="accountService.currentUser$ | async"
-      class="navbar-nav me-auto mb-2 mb-md-0"
-    >
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/members">Matches</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/lists">Lists</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/messages">Messages</a>
-      </li>
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <ng-container *ngIf="accountService.currentUser$ | async">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/members">Matches</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/lists">Lists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/messages">Messages</a>
+        </li>
+      </ng-container>
     </ul>
 
-    <div class="dropdown" dropdown *ngIf="accountService.currentUser$ | async">
+    <div
+      class="dropdown"
+      dropdown
+      *ngIf="accountService.currentUser$ | async as user"
+    >
       <a dropdownToggle class="dropdown-toggle text-light text-decoration-none"
-        >Welcome User</a
+        >Welcome {{ user.username | titlecase }}</a
       >
       <div *dropdownMenu class="dropdown-menu">
         <a class="dropdown-item">Edit Profile</a>
